@@ -2,5 +2,6 @@ from django.urls import path,include
 from . import views
 
 urlpatterns = [
-    path('', views.menuform)
+    path('', views.menuform),
+    path('order/', views.Orderform)
 ]

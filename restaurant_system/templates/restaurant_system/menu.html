@@ -1,4 +1,13 @@
 {%extends "restaurant_system/base.html"%}
 {% block content %}
 <p>Displays menu</p>
+{% for meal in meals%}
+<div><img src="{{ MEDIA_ROOT }}/{{meal.meal_image.url}}" alt=""></div>
+<div>{{meal.meal_name}}</div>
+<div>{{meal.meal_price}}</div>
+<div>{{meal.meal_availability_status}}</div>
+<div>
+    <button>Order</button>
+</div>
+{% endfor %}
 {% endblock content %}
