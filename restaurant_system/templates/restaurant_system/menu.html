@@ -1,13 +1,18 @@
 {%extends "restaurant_system/base.html"%}
 {% block content %}
 <p>Displays menu</p>
-{% for meal in meals%}
-<div><img src="{{ MEDIA_ROOT }}/{{meal.meal_image.url}}" alt=""></div>
-<div>{{meal.meal_name}}</div>
-<div>{{meal.meal_price}}</div>
-<div>{{meal.meal_availability_status}}</div>
-<div>
-    <button>Order</button>
+<div class="row">
+{% for meal in meals %}
+<div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="img-thumbnail"><img style="width:100%;" src="{{ MEDIA_ROOT }}/{{meal.meal_image.url}}" alt=""></div>
+    <div>g{{meal.meal_name}}</div>
+    <div>h{{meal.meal_price}}</div>
+    <div>h{{meal.meal_availability_status}}</div>
+    <div>
+        <a class="btn btn-primary" href="#">Order</a href="#">
+    </div>
 </div>
+
 {% endfor %}
+</div>
 {% endblock content %}

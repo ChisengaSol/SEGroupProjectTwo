@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'segptwo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'restaurantDB',
+        'NAME': 'restaurantdb',
         'USER':'postgres',
         'PASSWORD':'1234',
         'HOST':'localhost'
