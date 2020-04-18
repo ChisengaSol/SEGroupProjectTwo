@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import Menu, Orders
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 from decimal import Decimal
+=======
+>>>>>>> 0b15ddb706505c912b47b7b9263961612c8d20bf
 
 
 from django import forms
@@ -27,7 +30,11 @@ def post_menu(request):
 
 # @login_required
 def getMenu(request):
+<<<<<<< HEAD
     meals = Menu.objects.all() #.......here
+=======
+    meals = Menu.objects.all()
+>>>>>>> 0b15ddb706505c912b47b7b9263961612c8d20bf
     user = request.user
     return render(request,'restaurant_system/menu.html',{'meals': meals, 'user': user})
 
@@ -81,6 +88,7 @@ def addOrder(req, id):
 
 def getOrders(request):
     
+<<<<<<< HEAD
     return render(request, 'restaurant_system/orders.html', {"orders": meal_order})
 
 
@@ -95,3 +103,6 @@ def getBill(request):
         total += v
     return render(request,'restaurant_system/bill.html',{'orderlist':order,'total':total})
     
+=======
+    return render(request, 'restaurant_system/orders.html', {"orders": meal_order})
+>>>>>>> 0b15ddb706505c912b47b7b9263961612c8d20bf

@@ -25,7 +25,11 @@ class Menu(models.Model):
     UNAVAILABLE = 'unavailable'
     AVAILABLE = 'available'
     CHOICES = (
+<<<<<<< HEAD
         (UNAVAILABLE, 'unavailable'),
+=======
+        (UNAVAILABLE, 'available'),
+>>>>>>> 0b15ddb706505c912b47b7b9263961612c8d20bf
         (AVAILABLE , 'available'),
     )
 
@@ -44,6 +48,10 @@ class Orders(models.Model):
     menu = models.ManyToManyField(Menu)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b15ddb706505c912b47b7b9263961612c8d20bf
 class PaymentOrder(models.Model):
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
 
