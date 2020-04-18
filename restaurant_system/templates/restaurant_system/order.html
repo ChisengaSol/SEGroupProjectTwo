@@ -1,0 +1,24 @@
+{%extends "restaurant_system/base.html"%}
+{% block content %}
+<p>This one is for the order form</p>
+{% for order in meals %}
+    {% for menu in order.menu.all %}
+
+    <div class="row">
+        <div class="col-lg-6">
+            {{menu.meal_name}}
+        </div>
+
+        <div class="col-lg-3">
+            {{1}}
+        </div>
+
+        <div class="col-lg-3">
+            <a href="#" class="btn">+</a>
+            <a href="#" class="btn">-</a>
+        </div>
+    </div>
+        
+    {% endfor %}
+{% endfor %}
+{% endblock content %}

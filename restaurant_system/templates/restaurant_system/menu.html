@@ -1,0 +1,61 @@
+{%extends "restaurant_system/base.html"%}
+{% block content %}
+<p>Displays menu</p>
+<div class="row">
+
+
+{% for meal in meals %}
+
+    {%if user.id is not None%}
+    
+        <div class="col-lg-3 col-md-6 col-sm-12">
+
+            <form method="POST" action="/orders/">
+                {% csrf_token %}
+
+                <div class="img-thumbnail"><img style="width:100%;" src="{{ MEDIA_ROOT }}/{{meal.meal_image.url}}" alt=""></div>
+                <div>{{meal.meal_name}}</div>
+                <div>{{meal.meal_price}}</div>
+                <div>{{meal.meal_availability_status}}</div>
+                
+                <input name=user_id value={{user.id}}>
+                <input name=meal_id value={{meal.id}}>
+                
+                <input type="submit"  class="danger" value="+">
+
+            </form>   
+        </div>
+
+       
+    {% else %}
+    
+    
+        <div class="col-lg-3 col-md-6 col-sm-12">
+
+            <form method="GET" action="/accounts/login">
+                {% csrf_token %}
+
+                <div class="img-thumbnail"><img style="width:100%;" src="{{ MEDIA_ROOT }}/{{meal.meal_image.url}}" alt=""></div>
+                <div>{{meal.meal_name}}</div>
+                <div>{{meal.meal_price}}</div>
+                <div>{{meal.meal_availability_status}}</div>
+                
+            
+
+                
+                    <input type="submit"  class="danger"> + </input>
+                
+                
+            </form>
+
+        </div>
+
+    {% endif %}
+
+
+{% endfor %}
+
+</div>
+
+
+{% endblock content %}
