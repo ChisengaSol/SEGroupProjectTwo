@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Menu
+from .models import Menu, Orders
 from django.contrib.auth.decorators import login_required
 
 
@@ -11,6 +11,7 @@ from django.contrib.auth import (
     logout
 )
 from .forms import UserLoginForm
+from django.contrib import messages
 # UserRegisterForm
 
 
@@ -21,66 +22,62 @@ def menuform(request):
 
 
 def post_menu(request):
-
     return render(request, 'restaurant_system/menu.html')
 
-
+# @login_required
 def getMenu(request):
-    return render(request, 'restaurant_system/')
     meals = Menu.objects.all()
-    return render(request,'restaurant_system/menu.html',{'meals': meals})
+    user = request.user
+    return render(request,'restaurant_system/menu.html',{'meals': meals, 'user': user})
 
 def Orderform(request):
-    return render(request,'restaurant_system/order.html')
+
+    if request.POST:
+
+        menu_id = request.POST.get("meal_id")
+        # user_id = request.POST.get("user_id")
+
+        meal = Menu.objects.filter(id = menu_id)
+        meal_obj = meal[0]
+        meal_order = Orders.objects.filter(user=request.user).filter(menu= meal_obj)
+        if not meal_order :
+            meal_order = Orders(user=request.user)
+            meal_order.save()
+            meal_order.menu.add(meal_obj)
+            messages.success(request, 'successfully added')
+            return redirect('/')
+        else:
+            meal_order = Orders.objects.filter(user = request.user)
+            messages.warning(request, 'already exist in your order please proceed to check out!')
+            return redirect('/')
+            # return render(request,'restaurant_system/order.html', {"meals":meal_order, "failed": True})
+
+        
+        
+        # meal_order.save()
+            
+    else:
+        meal_order = Orders.objects.filter(user = request.user)
+        return render(request,'restaurant_system/order.html', {"meals":meal_order})
+
+def addOrder(req, id):
+    if request.POST:
+        menu_id = request.POST.get("meal_id")
+        # user_id = request.POST.get("user_id")
+
+        meal = Menu.objects.filter(id = menu_id)
+        meal_obj = meal[0]
+        meal_order = Orders.objects.filter(user=request.user).filter(menu= meal_obj)
+
+        meal_order = Orders(user=request.user)
+        meal_order.save()
+        meal_order.menu.add(meal_obj)
+        messages.success(request, 'successfully added')
+        return redirect(request.path_info)
 
 
-def login_view(request):
-    next = request.GET.get('next')
-    form  = UserLoginForm(request.POST or None)
-    # import pdb; pdb.set_trace()
-    if form.is_valid():
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password')
-
-        user = authenticate(username=username, password=password)
-        if user is None:
-            return redirect('/restaurant/login')
-        login(request, user)
 
 
-        if next:
-            return redirect(next)
-        return redirect('/restaurant')
+def getOrders(request):
     
-    context = {
-        "form": form
-    }
-    return render(request, "login.html", context)
-
-
-
-def register_view(request):
-    next = request.GET.get('next')
-    form  = UserRegisterForm(request.POST or None)
-    # import pdb; pdb.set_trace()
-    if form.is_valid():
-        user = form.save(commit=False)
-        password = form.cleaned_data.get('password')
-        user.set_password(password)
-        user.save()
-        new_user =  authenticate(username=username, password=password)
-        login(request, user)
-
-
-        if next:
-            return redirect(next)
-        return redirect('/restaurant')
-    
-    context = {
-        "form": form
-    }
-    return render(request, "signup.html", context)
-
-def logout_view(request):
-    logout(request)
-    return redirect('/restaurant')
+    return render(request, 'restaurant_system/orders.html', {"orders": meal_order})

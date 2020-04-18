@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 # class User(AbstractUser):
@@ -39,16 +41,10 @@ class Payment(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
 
 class Orders(models.Model):
-    order_number= models.CharField(max_length=30)
-    order_decription= models.CharField(max_length=200)
-    order_amount = models.DecimalField(max_digits=10, decimal_places=5)
-    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    menu = models.ManyToManyField(Menu)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
 
-class MenueOrder(models.Model):
-    menu_id= models.ForeignKey(Menu, on_delete=models.CASCADE)
-    order_id= models.ForeignKey(Orders, on_delete=models.CASCADE) 
 
 class PaymentOrder(models.Model):
-    payment_id = models.ForeignKey(Payment, on_delete=models.CASCADE)
-    order_id= models.ForeignKey(Orders, on_delete=models.CASCADE) 
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
 

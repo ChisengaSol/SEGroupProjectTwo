@@ -18,10 +18,14 @@ from django.urls import path,include
 from . import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('restaurant/',include('restaurant_system.urls'))
-] 
+    path('',include('restaurant_system.urls')),
+    path('accounts/login/', views.login_view),
+    path('accounts/signup/', views.register_view),
+    path('accounts/logout/', views.logout_view)
+]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
