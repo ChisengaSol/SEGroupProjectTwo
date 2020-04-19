@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Menu, Orders
 from django.contrib.auth.decorators import login_required
+from decimal import Decimal #i dont even think its doing anything though
 
 
 from django import forms
@@ -81,3 +82,16 @@ def addOrder(req, id):
 def getOrders(request):
     
     return render(request, 'restaurant_system/orders.html', {"orders": meal_order})
+
+
+
+def getBill(request):
+    order = {}
+    total = 0
+    for obj in Orders.objects.all():
+        for meal in obj.menu.all():
+            order[meal.meal_name] =meal.meal_price
+    
+    for k,v in order.items():
+        total += v
+    return render(request,'restaurant_system/bill.html',{'orderlist':order,'total':total})
