@@ -88,7 +88,6 @@ def addOrder(req, id):
 
 def getOrders(request):
     
-<<<<<<< HEAD
     return render(request, 'restaurant_system/orders.html', {"orders": meal_order})
 
 
@@ -103,6 +102,3 @@ def getBill(request):
         total += v
     return render(request,'restaurant_system/bill.html',{'orderlist':order,'total':total})
     
-=======
-    return render(request, 'restaurant_system/orders.html', {"orders": meal_order})
->>>>>>> 0b15ddb706505c912b47b7b9263961612c8d20bf
