@@ -93,10 +93,15 @@ def getBill(request):
     
     for k,v in order.items():
         total += v
-
     return render(request,'restaurant_system/bill.html',{'orderlist':order,'total':total})
 
+def pay(request):
+    return render(request, 'restaurant_system/payment.html')
 
+def paymentconfirmation(request):
+    import pdb; pdb.set_trace()
+    data = request.GET
+    return render(request, 'restaurant_system/payment_confirmation.html', {"data":data})
 def makeMoreOrders(request):
     if request.POST:
 
@@ -108,6 +113,3 @@ def makeMoreOrders(request):
             
     else:
         return render(request,'restaurant_system/order.html')
-
-            
-    

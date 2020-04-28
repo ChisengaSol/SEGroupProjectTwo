@@ -41,10 +41,15 @@ class Payment(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
 
 class Orders(models.Model):
-    menu = models.ManyToManyField(Menu)
+    DRAFT = 'draft'
+    CONFIRMED = 'confirmed'
+    CHOICES = (
+        (DRAFT, 'draft'), 
+        (CONFIRMED , 'confirmed'),
+    )
+    menu = models.ManyToManyField(Menu)   
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     qty = models.IntegerField(default=1)
 
 class PaymentOrder(models.Model):
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
-

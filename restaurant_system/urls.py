@@ -7,7 +7,9 @@ urlpatterns = [
     path('orders/', views.Orderform),
     path('bill/',views.getBill),
     path('post_menu/', views.post_menu),
-    path('post_menu/', views.post_menu),
-    #path('orders/',views.makeMoreOrders)
+    path('bill/',views.getBill),
+    path('payment/', views.pay),
+    path('confirmpayment/',views.paymentconfirmation),
+    #path('orders/', views.makeMoreOrders)
 ]
 
