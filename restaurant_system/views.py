@@ -100,5 +100,6 @@ def pay(request):
     return render(request, 'restaurant_system/payment.html')
 
 def paymentconfirmation(request):
-    if(request.POST):
-        return render(request, 'restaurant_system/payment_confirmation.html')
+    import pdb; pdb.set_trace()
+    data = request.GET
+    return render(request, 'restaurant_system/payment_confirmation.html', {"data":data})
