@@ -13,7 +13,7 @@
             <form method="POST" action="/orders/">
                 {% csrf_token %}
 
-                <div class="img-thumbnail"><img style="width:100%;" src="{{ MEDIA_ROOT }}/{{meal.meal_image.url}}" alt=""></div>
+                <div class="img-thumbnail"><img style="width:100%;"width="350" height="350" src="{{ MEDIA_ROOT }}/{{meal.meal_image.url}}" alt=""></div>
                 <div>{{meal.meal_name}}</div>
                 <div>{{meal.meal_price}}</div>
                 <div>{{meal.meal_availability_status}}</div>

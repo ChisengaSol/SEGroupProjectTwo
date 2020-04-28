@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Menu, Orders
+from django.db.models import F
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
-from decimal import Decimal
-=======
->>>>>>> 0b15ddb706505c912b47b7b9263961612c8d20bf
 
+from decimal import Decimal
 
 from django import forms
 from django.contrib.auth import (
@@ -30,11 +28,7 @@ def post_menu(request):
 
 # @login_required
 def getMenu(request):
-<<<<<<< HEAD
-    meals = Menu.objects.all() #.......here
-=======
     meals = Menu.objects.all()
->>>>>>> 0b15ddb706505c912b47b7b9263961612c8d20bf
     user = request.user
     return render(request,'restaurant_system/menu.html',{'meals': meals, 'user': user})
 
@@ -90,7 +84,6 @@ def getOrders(request):
     
     return render(request, 'restaurant_system/orders.html', {"orders": meal_order})
 
-
 def getBill(request):
     order = {}
     total = 0
@@ -100,5 +93,21 @@ def getBill(request):
     
     for k,v in order.items():
         total += v
+
     return render(request,'restaurant_system/bill.html',{'orderlist':order,'total':total})
+
+
+def makeMoreOrders(request):
+    if request.POST:
+
+        menu_name = request.POST["mealname"]
+        menu_id = request.POST["mealid"]
+        if Orders.objects.filter(id=menu_id).exists():
+            Orders.objects.filter(id=menu_id).update(qty=F('qty') +1)
+        return render(request,'restaurant_system/order.html')       
+            
+    else:
+        return render(request,'restaurant_system/order.html')
+
+            
     
