@@ -3,7 +3,7 @@
 <p>This one is for the order form</p>
 {% for order in meals %}
     {% for menu in order.menu.all %}
-    <form action="" method="post">
+    <form action="/more_orders/" method="post">
     {% csrf_token %}
     <div class="row">
         <div class="col-lg-6">
@@ -11,11 +11,11 @@
         </div>
 
         <div class="col-lg-3">
-            {{1}}
+            {{order.qty}}
         </div>
 
         <div class="col-lg-3">
-            <a href="#" class="btn">+</a>
+            <!-- <a href="#" class="btn">+</a> -->
             <a href="#" class="btn">-</a>
                 <input name="mealname" type="hidden" value="{{menu.meal_name}}">    
                 <input name="mealid" type="hidden" value="{{menu.id}}">         

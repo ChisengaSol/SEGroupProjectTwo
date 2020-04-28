@@ -10,6 +10,6 @@ urlpatterns = [
     path('bill/',views.getBill),
     path('payment/', views.pay),
     path('confirmpayment/',views.paymentconfirmation),
-    #path('orders/', views.makeMoreOrders)
+    path('more_orders/', views.makeMoreOrders)
 ]
 

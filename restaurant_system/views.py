@@ -102,6 +102,7 @@ def paymentconfirmation(request):
     import pdb; pdb.set_trace()
     data = request.GET
     return render(request, 'restaurant_system/payment_confirmation.html', {"data":data})
+
 def makeMoreOrders(request):
     if request.POST:
 
@@ -109,7 +110,7 @@ def makeMoreOrders(request):
         menu_id = request.POST["mealid"]
         if Orders.objects.filter(id=menu_id).exists():
             Orders.objects.filter(id=menu_id).update(qty=F('qty') +1)
-        return render(request,'restaurant_system/order.html')       
+        return redirect("/orders/")     
             
     else:
-        return render(request,'restaurant_system/order.html')
+        return redirect("/orders/")
