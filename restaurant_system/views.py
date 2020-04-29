@@ -33,7 +33,6 @@ def getMenu(request):
     return render(request,'restaurant_system/menu.html',{'meals': meals, 'user': user})
 
 def Orderform(request):
-
     if request.POST:
 
         menu_id = request.POST.get("meal_id")
@@ -41,7 +40,7 @@ def Orderform(request):
 
         meal = Menu.objects.filter(id = menu_id)
         meal_obj = meal[0]
-        meal_order = Orders.objects.filter(user=request.user).filter(menu= meal_obj)
+        meal_order = Orders.objects.filter(user=request.user).filter(order_status='draft').filter(menu= meal_obj)
         if not meal_order :
             meal_order = Orders(user=request.user)
             meal_order.save()
@@ -59,8 +58,8 @@ def Orderform(request):
         # meal_order.save()
             
     else:
-        meal_order = Orders.objects.filter(user = request.user)
-        return render(request,'restaurant_system/order.html', {"meals":meal_order})
+        meal_order = Orders.objects.filter(user = request.user)  
+        return render(request,'restaurant_system/order.html', {"meals":meal_order, "total_price": totalPrice(meal_order)})
 
 def addOrder(req, id):
     if request.POST:
@@ -78,10 +77,7 @@ def addOrder(req, id):
         return redirect(request.path_info)
 
 
-
-
 def getOrders(request):
-    
     return render(request, 'restaurant_system/orders.html', {"orders": meal_order})
 
 def getBill(request):
@@ -99,7 +95,6 @@ def pay(request):
     return render(request, 'restaurant_system/payment.html')
 
 def paymentconfirmation(request):
-    import pdb; pdb.set_trace()
     data = request.GET
     return render(request, 'restaurant_system/payment_confirmation.html', {"data":data})
 
@@ -114,3 +109,12 @@ def makeMoreOrders(request):
             
     else:
         return redirect("/orders/")
+
+
+def totalPrice(orders):
+    total = 0
+    for order in orders:
+        for meal in order.menu.all():
+            total = total + meal.meal_price * order.qty
+    
+    return total
