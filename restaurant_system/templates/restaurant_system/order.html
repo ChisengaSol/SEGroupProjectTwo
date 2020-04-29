@@ -35,6 +35,28 @@
     {% endfor %}
 {% endfor %}
 <div>Total: {{ total_price }} Ghana cedis</div>
+<div>
+
+    <form>
+        <a class="flwpug_getpaid btn btn-primary"
+        data-PBFPubKey="FLWPUBK_TEST-8bc73442573e3715fa4e63e901511d04-X"
+        data-txref="rave-123456"
+        data-amount="{{total_price}}"
+        data-customer_email="{{request.user.email}}"
+        data-meta-flightID="APX0093GHK"
+        data-currency="GHS" 
+        data-pay_button_text="Pay Now"
+        data-country="GH" 
+        data-redirect_url="http://1502ede0.ngrok.io/confirmpayment/"></a>
+      
+        <script type="text/javascript" src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+      </form>
+      <br>
+    <form action="">
+        <input class="btn btn-primary" type="submit" value="Pay Later">
+    </form>
+
+</div>
 
 {{data}}
 {% endblock content %}
