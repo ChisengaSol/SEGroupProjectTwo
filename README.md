@@ -1,9 +1,14 @@
 # SEGroupProjectTwo
 This is the online food ordering system which meets the following functional requirements:
+
 1)It enables customers of a restaurant to browse the menu 
+
 2)The customers can choose and order the dishes they prefer.
+
 3)The chefs in the kitchen are able to receive the orders as they are made. 
+
 4)The customer is able to see the bill for the orders made. 
+
 5)The system provides payment options for the customer.
 
 One data structure used in this project is the dictionary. This is because its key-value characteristic 
