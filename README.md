@@ -19,10 +19,9 @@ The methods in which this data structure is used include getMenu, and Orderform.
 are used to store the availabe meals that are then displayed to the user. In the Orderform, the data structure is used to
 to store the orders made by the customer.
 
-In building this system, the python django framework has been used for the backend and bootstrap for the frontend. One of the 
-reasons of using the django franework is that it supports major operating systems and hence enhances the accessibility of web applications.
-It also makes it easier to work with different databases. Django also has built-in security features which protect the web applications 
-attacks by malicious users. In addition, Django supports model-view-controller (MVC) design. Postgresql has been used for the database.
+In building this system, the python django framework has been used for the backend. One of the 
+reasons of using the django franework is that it supports major operating systems and hence enhances the accessibility of web applications. It also makes it easier to work with different databases. Django also has built-in security features which protect the web applications from attacks by malicious users. In addition, Django supports model-view-controller (MVC) design. Postgresql has been used for the database.
+The bootstrap framework has been used for the frontend development. This is becasue it provides templates with CSS, HTML and JavaScript that are faster and easier to use.
 
 To meet the online payment functionality, the Rave Payment API has been used. The API facilitates payment for meals through 
 various payment options including mobile money and credit card.
