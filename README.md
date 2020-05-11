@@ -1,5 +1,5 @@
 # SEGroupProjectTwo
-This is the online food ordering system which meets the functional requirements below:
+This is the online food ordering system which meets the following functional requirements:
 1)It enables customers of a restaurant to browse the menu 
 2)The customers can choose and order the dishes they prefer.
 3)The chefs in the kitchen are able to receive the orders as they are made. 
