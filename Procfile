@@ -1,2 +1,1 @@
-  
-web: gunicorn SEGroupProjectTwo.wsgi --log-file -
+web: waitress-serve --port=$PORT SEGroupProjectTwo.wsgi:application
