@@ -26,12 +26,12 @@ SECRET_KEY = 'vsy2ogi8fsa@p989%ds*2h--)^h=r&!^79^yq20e#589!u%)#4'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost', 
-    '127.0.0.1',
-    '6f1b7d80.ngrok.io'
+    #'localhost', 
+    #'127.0.0.1',
+    #'6f1b7d80.ngrok.io'
+    'foodcourtsystem.herokuapp.com'
 
     ]
-
 
 # Application definition
 
