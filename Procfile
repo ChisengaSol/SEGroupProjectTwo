@@ -1,2 +1,2 @@
   
-web: gunicorn segptwo.wsgi --log-file -
+web: gunicorn SEGroupProjectTwo.wsgi --log-file -
