@@ -80,16 +80,13 @@ WSGI_APPLICATION = 'segptwo.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-   # 'default': {
-    #    'ENGINE': 'django.db.backends.postgresql',
-    #    'NAME': 'restaurantdb',
-    ##    'USER':'postgres',
-    #    'PASSWORD':'1234',
-    #    'HOST':'localhost'
-   # }
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'restaurantdb',
+        'USER':'postgres',
+        'PASSWORD':'1234',
+        'HOST':'localhost'
+    }
 }
 
 
