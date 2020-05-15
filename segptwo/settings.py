@@ -26,8 +26,8 @@ SECRET_KEY = 'vsy2ogi8fsa@p989%ds*2h--)^h=r&!^79^yq20e#589!u%)#4'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    #'localhost', 
-    #'127.0.0.1',
+    'localhost', 
+    '127.0.0.1',
     #'6f1b7d80.ngrok.io'
     'foodcourtsystem.herokuapp.com'
 
@@ -80,13 +80,16 @@ WSGI_APPLICATION = 'segptwo.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'restaurantdb',
-        'USER':'postgres',
-        'PASSWORD':'1234',
-        'HOST':'localhost'
-    }
+   # 'default': {
+    #    'ENGINE': 'django.db.backends.postgresql',
+    #    'NAME': 'restaurantdb',
+    ##    'USER':'postgres',
+    #    'PASSWORD':'1234',
+    #    'HOST':'localhost'
+   # }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
 
 
