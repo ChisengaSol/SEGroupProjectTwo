@@ -42,8 +42,8 @@ class UserRegisterForm(forms.ModelForm):
 
 
     def clean_email(self):
-        email = self.clean_data.get('email')
-        email2 = self.clean_data.get('email2')
+        email = self.cleaned_data.get('email')
+        email2 = self.cleaned_data.get('email2')
 
         if email!= email2:
             raise forms.ValidationError(

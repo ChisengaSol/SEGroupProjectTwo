@@ -34,11 +34,7 @@ class Menu(models.Model):
     meal_image = models.ImageField(upload_to='uploads/')
     meal_availability_status = models.CharField(max_length=255, choices=CHOICES, default=AVAILABLE)
 
-class Payment(models.Model):
-    payment_type = models.CharField(max_length=30)
-    payment_date = models.CharField(max_length=30)
-    payment_amount= models.DecimalField(max_digits=10, decimal_places=5)
-    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+
 
 class Orders(models.Model):
     DRAFT = 'draft'
@@ -54,6 +50,21 @@ class Orders(models.Model):
     qty = models.IntegerField(default=1)
     order_status = models.CharField(max_length=255, choices=CHOICES, default=DRAFT)
 
-
-class PaymentOrder(models.Model):
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+class Payment(models.Model):
+    CARD = 'card'
+    CASH = 'cash'
+    MOBILEMONEY = 'mobilemoney'
+    MOBILEMONEY = 'mobilemoney'
+    CHOICES = (
+        (CARD, 'card'), 
+        (CASH , 'cash'),
+        (MOBILEMONEY, 'mobilemoney'),
+    )
+    payment_method = models.CharField(max_length=255, choices=CHOICES, default=CASH)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
+    payment_amount= models.DecimalField(max_digits=10, decimal_places=5)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    order = models.ManyToManyField(Orders)
+    amount = models.FloatField(default=0.0)
+# class PaymentOrder(models.Model):
+#     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)

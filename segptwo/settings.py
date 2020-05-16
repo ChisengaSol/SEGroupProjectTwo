@@ -28,13 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost', 
     '127.0.0.1',
-    '1502ede0.ngrok.io'
-
+    'a27375fb.ngrok.io',
     ]
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'restaurant_system'
+    'restaurant_system',
 ]
 
 MIDDLEWARE = [

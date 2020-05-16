@@ -9,15 +9,13 @@ from django.contrib.auth import (
     login, 
     logout
 )
-from .forms import UserLoginForm
-# UserRegisterForm
+from .forms import UserLoginForm, UserRegisterForm
 
 
 # Create your views here.
 def login_view(request):
     next = request.GET.get('next')
     form  = UserLoginForm(request.POST or None)
-    # import pdb; pdb.set_trace()
     if form.is_valid():
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
@@ -47,9 +45,8 @@ def register_view(request):
         password = form.cleaned_data.get('password')
         user.set_password(password)
         user.save()
-        new_user =  authenticate(username=username, password=password)
+        new_user =  authenticate(username=user.username, password=password)
         login(request, user)
-
 
         if next:
             return redirect(next)

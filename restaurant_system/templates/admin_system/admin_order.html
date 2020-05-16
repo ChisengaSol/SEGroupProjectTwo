@@ -2,17 +2,6 @@
 {% block content %}
 
 
-{%if not data%}
-    <div>Here is your bill, pay at the cachier</div>
-
-{%elif data.data.data.status == 'successful' %}
-    <div class="alert alert-{{message.tags}}" role="alert">
-        Your payment was successful
-    </div>
-
-{% endif %}
-
-
 {% for order in meals %}
 
     {% for menu in order.menu.all %}
@@ -33,17 +22,15 @@
 
         <div class="col-lg-2">
             <!-- <a href="#" class="btn">+</a> -->
-            
-            <input name="mealname" type="hidden" value="{{menu.meal_name}}">    
-            <input name="mealid" type="hidden" value="{{menu.id}}">         
-                           
+            <a href="#" class="btn">-</a>
+                <input name="mealname" type="hidden" value="{{menu.meal_name}}">    
+                <input name="mealid" type="hidden" value="{{menu.id}}">         
+                <input type="submit"  class="danger" value="+">
+                        
         </div>
     </div>
 </form>
         
     {% endfor %}
 {% endfor %}
-<div>Total: {{ total_price }} Ghana cedis</div>
-
-
-{% endblock content %}
+{% endblock content%}

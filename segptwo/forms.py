@@ -27,8 +27,9 @@ class UserLoginForm(forms.Form):
         return super(UserLoginForm, self).clean(*args, **kwargs)
 
 class UserRegisterForm(forms.ModelForm):
+    
     email = forms.EmailField(label='Email Address')
-    email2 = forms.EmailField(label='Confirm Address')
+    # email2 = forms.EmailField(label='Confirm Address')
     password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
@@ -36,22 +37,22 @@ class UserRegisterForm(forms.ModelForm):
         fields = (
             'username',
             'email',
-            'email2',
+            # 'email2',
             'password',
         )
 
-
     def clean_email(self):
-        email = self.clean_data.get('email')
-        email2 = self.clean_data.get('email2')
+        email = self.cleaned_data.get('email')
+        # email2 = self.cleaned_data.get('email2') #self.cleaned_data.get('email1')
 
-        if email!= email2:
+
+        if email!= email:
             raise forms.ValidationError(
             'emails must match'
         )
 
-        email_qs = User.object.filter(email=email)
-        if email_qs.exist():
+        email_qs = User.objects.filter(email=email)
+        if email_qs:
             raise forms.ValidationError(
             'This email has already been used'
         )

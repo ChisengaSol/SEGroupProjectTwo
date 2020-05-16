@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Menu, Orders
+from .models import Menu, Orders, User
 from django.db.models import F
 from django.contrib.auth.decorators import login_required
 
 from decimal import Decimal
-
+import json
 from django import forms
 from django.contrib.auth import (
     authenticate,
@@ -34,7 +34,6 @@ def getMenu(request):
 
 def Orderform(request):
     if request.POST:
-
         menu_id = request.POST.get("meal_id")
         # user_id = request.POST.get("user_id")
 
@@ -52,13 +51,10 @@ def Orderform(request):
             messages.warning(request, 'already exist in your order please proceed to check out!')
             return redirect('/')
             # return render(request,'restaurant_system/order.html', {"meals":meal_order, "failed": True})
-
-        
-        
         # meal_order.save()
             
     else:
-        meal_order = Orders.objects.filter(user = request.user)  
+        meal_order = Orders.objects.filter(user = request.user).filter(order_status='draft')  
         return render(request,'restaurant_system/order.html', {"meals":meal_order, "total_price": totalPrice(meal_order)})
 
 def addOrder(req, id):
@@ -95,16 +91,23 @@ def pay(request):
     return render(request, 'restaurant_system/payment.html')
 
 def paymentconfirmation(request):
+    import pdb; pdb.set_trace()
     data = request.GET
-    return render(request, 'restaurant_system/payment_confirmation.html', {"data":data})
-
+    parsed_data = json.loads(data.get('resp'))
+    user = User.objects.filter(email=parsed_data.get('tx').get('customer').get('email'))
+    meal_order = Orders.objects.filter(user__in = user, order_status='draft')  
+    # meal_order = None
+    
+    return render(request, 'restaurant_system/payment_confirmation.html', {"data":parsed_data, "meal_ord": meal_order})
+    
 def makeMoreOrders(request):
     if request.POST:
-
         menu_name = request.POST["mealname"]
         menu_id = request.POST["mealid"]
-        if Orders.objects.filter(id=menu_id).exists():
-            Orders.objects.filter(id=menu_id).update(qty=F('qty') +1)
+
+        menu = Menu.objects.filter(id=menu_id)
+        if Orders.objects.filter(menu__in=menu, order_status='draft', user=request.user).exists():
+            Orders.objects.filter(menu__in=menu, user=request.user, order_status='draft').update(qty=F('qty') +1)
         return redirect("/orders/")     
             
     else:
@@ -118,3 +121,10 @@ def totalPrice(orders):
             total = total + meal.meal_price * order.qty
     
     return total
+
+'''
+ADMIN SIDE
+'''
+def admin_view_order(request):
+    payment_order = Payment.objects.all.by_date()
+    return render(request,'admin_system/admin_order.html', {"orders":payment_order})
