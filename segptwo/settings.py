@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,8 +30,12 @@ ALLOWED_HOSTS = [
     'localhost', 
     '127.0.0.1',
     'a27375fb.ngrok.io',
-    ]
+    #'localhost', 
+    #'127.0.0.1',
+    #'6f1b7d80.ngrok.io'
+    'foodcourtsystem.herokuapp.com'
 
+    ]
 
 # Application definition
 INSTALLED_APPS = [
@@ -128,3 +133,9 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+django_heroku.settings(locals())
