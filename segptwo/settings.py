@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restaurant_system',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,10 @@ STATICFILES_DIRS = (
 )
 
 django_heroku.settings(locals())
+
+AWS_ACCESS_KEY_ID = 'AKIAUBOZ73VIHWYWH6MJ'
+AWS_SECRET_ACCESS_KEY  = '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'
+AWS_STORAGE_BUCKET_NAME = 'django-foodcourt'
+AWS_S3_FILE_OVERWRITE =False
+AWS_DEFAULT_ACL =None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
