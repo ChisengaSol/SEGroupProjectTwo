@@ -91,6 +91,7 @@ def pay(request):
     return render(request, 'restaurant_system/payment.html')
 
 def paymentconfirmation(request):
+    import pdb; pdb.set_trace()
     data = request.GET
     parsed_data = json.loads(data.get('resp'))
     user = User.objects.filter(email=parsed_data.get('tx').get('customer').get('email'))
