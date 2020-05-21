@@ -36,9 +36,11 @@
     {% endfor %}
 {% endfor %}
 <div>Total: {{ total_price }} Ghana cedis</div>
+
+
 <div>
 
-    <form>
+    <form action="/payment/" method="POST"> 
         <a class="flwpug_getpaid btn btn-primary"
         data-PBFPubKey="FLWPUBK_TEST-8bc73442573e3715fa4e63e901511d04-X"
         data-txref="rave-123456"
@@ -53,8 +55,9 @@
         <script type="text/javascript" src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
       </form>
       <br>
-    <form action="/confirmpayment/" action="POST">
-        <input name="mealname" type="hidden" value="{{menu.meal_name}}"> 
+    <form action="/payment/" method="POST">
+        <input name="mealname" type="hidden" value="{{menu.meal_name}}">
+        <input name="mealid" type="hidden" value="{{menu.id}}" >
         <input class="btn btn-primary" type="submit" value="Pay Later">
     </form>
 </div>
