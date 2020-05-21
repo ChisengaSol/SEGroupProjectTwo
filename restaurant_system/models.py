@@ -24,15 +24,28 @@ class Customer(models.Model):
 class Menu(models.Model):
     UNAVAILABLE = 'unavailable'
     AVAILABLE = 'available'
+    BREAKFAST = 'breakfast'
+    LUNCH = 'lunch'
+    DINNER= 'dinner'
+    DRINKS= 'drinks'
+
     CHOICES = (
         (UNAVAILABLE, 'unavailable'),
         (AVAILABLE , 'available'),
+    )
+
+    CATEGORIES=(
+        (BREAKFAST, 'breakfast'),
+        (LUNCH, 'lunch'),
+        (DINNER, 'dinner'),
+        (DRINKS, 'drinks')
     )
 
     meal_name = models.CharField(max_length=30)
     meal_price = models.DecimalField(max_digits=10, decimal_places=5)
     meal_image = models.ImageField(upload_to='uploads/')
     meal_availability_status = models.CharField(max_length=255, choices=CHOICES, default=AVAILABLE)
+    meal_category = models.CharField(max_length=30, choices=CATEGORIES, default=LUNCH)
 
 
 
