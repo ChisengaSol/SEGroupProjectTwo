@@ -6,7 +6,7 @@
 {% for order in meals %}
 
     {% for menu in order.menu.all %}
-    <form action="/more_orders/" method="post">
+    <!-- <form action="/more_orders/" method="post">
     {% csrf_token %}
     <div class="row">
         <div class="col-lg-6">
@@ -22,23 +22,50 @@
         </div>
 
         <div class="col-lg-2">
-            <!-- <a href="#" class="btn">+</a> -->
             <a href="#" class="btn">-</a>
                 <input name="mealname" type="hidden" value="{{menu.meal_name}}">    
                 <input name="mealid" type="hidden" value="{{menu.id}}">  
-               <!-- <input type="submit" name="minus" class="danger" value="-"> -->    
                 <input type="submit" name="plus" class="danger" value="+">
                         
         </div>
     </div>
+</form> -->
+
+
+<form action="/more_orders/" method="post">
+    {% csrf_token %}
+
+    <table class="table">
+        
+        <tbody>
+        <tr>
+            <td>{{menu.meal_name}}</td>
+            <td>{{order.qty}}</td>
+            <td>{{menu.meal_price}}</td>
+            <td><div class="col-lg-2">
+                <!-- <a href="#" class="btn">+</a> -->
+                
+                <a href="#" class="btn">-</a>
+                    <input name="mealname" type="hidden" value="{{menu.meal_name}}">    
+                    <input name="mealid" type="hidden" value="{{menu.id}}">  
+                <!-- <input type="submit" name="minus" class="danger" value="-"> -->    
+                    <input type="submit" name="plus" class="danger" value="+">
+                            
+            </div></td>
+        </tr>
+        </tbody>
+    </table>
 </form>
+
         
     {% endfor %}
 {% endfor %}
 <div>Total: {{ total_price }} Ghana cedis</div>
+
+
 <div>
 
-    <form>
+    <form action="/payment/" method="POST"> 
         <a class="flwpug_getpaid btn btn-primary"
         data-PBFPubKey="FLWPUBK_TEST-8bc73442573e3715fa4e63e901511d04-X"
         data-txref="rave-123456"
@@ -53,8 +80,9 @@
         <script type="text/javascript" src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
       </form>
       <br>
-    <form action="/confirmpayment/" action="POST">
-        <input name="mealname" type="hidden" value="{{menu.meal_name}}"> 
+    <form action="/payment/" method="POST">
+        <input name="mealname" type="hidden" value="{{menu.meal_name}}">
+        <input name="mealid" type="hidden" value="{{menu.id}}" >
         <input class="btn btn-primary" type="submit" value="Pay Later">
     </form>
 </div>
