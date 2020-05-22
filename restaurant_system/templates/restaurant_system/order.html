@@ -1,6 +1,10 @@
 {%extends "restaurant_system/base.html"%}
 {% block content %}
-<p>This one is for the order form</p>
+<div class="container mt-2">
+
+
+<div class="center-block">
+<h3>Your cart</h3>
 
 
 {% for order in meals %}
@@ -44,12 +48,19 @@
             <td>{{menu.meal_price}}</td>
             <td><div class="col-lg-2">
                 <!-- <a href="#" class="btn">+</a> -->
-                
-                <a href="#" class="btn">-</a>
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <a href="#" class="btn">-</a>
+                    </div>
                     <input name="mealname" type="hidden" value="{{menu.meal_name}}">    
                     <input name="mealid" type="hidden" value="{{menu.id}}">  
                 <!-- <input type="submit" name="minus" class="danger" value="-"> -->    
-                    <input type="submit" name="plus" class="danger" value="+">
+                <div class="col-lg-6 col-md-12">
+                    <input type="submit" name="plus" class="btn btn-danger" value="+">
+                </div>
+
+                </div>
+                
                             
             </div></td>
         </tr>
@@ -63,10 +74,10 @@
 <div>Total: {{ total_price }} Ghana cedis</div>
 
 
-<div>
+
 
     <form action="/payment/" method="POST"> 
-        <a class="flwpug_getpaid btn btn-primary"
+        <a class="flwpug_getpaid"
         data-PBFPubKey="FLWPUBK_TEST-8bc73442573e3715fa4e63e901511d04-X"
         data-txref="rave-123456"
         data-amount="{{total_price}}"
@@ -75,7 +86,7 @@
         data-currency="GHS" 
         data-pay_button_text="Pay Now"
         data-country="GH" 
-        data-redirect_url="confirmpayment/"></a>
+        data-redirect_url="/"></a>
       
         <script type="text/javascript" src="https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
       </form>
@@ -83,9 +94,11 @@
     <form action="/payment/" method="POST">
         <input name="mealname" type="hidden" value="{{menu.meal_name}}">
         <input name="mealid" type="hidden" value="{{menu.id}}" >
-        <input class="btn btn-primary" type="submit" value="Pay Later">
+        <input class="btn btn-danger" type="submit" value="Pay Later">
     </form>
 </div>
+</div>
+
 
 {{data}}
 {% endblock content %}

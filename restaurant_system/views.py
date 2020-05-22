@@ -127,3 +127,5 @@ ADMIN SIDE
 def admin_view_order(request):
     payment_order = Payment.objects.all.by_date()
     return render(request,'admin_system/admin_order.html', {"orders":payment_order})
+
+    
