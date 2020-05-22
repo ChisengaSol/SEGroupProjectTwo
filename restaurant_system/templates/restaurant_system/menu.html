@@ -51,7 +51,6 @@
                     <input type="submit"  class="btn btn-danger" value="add to cart">
                 </div>
                 </div>
-
                 </form>   
             </div>
 
@@ -234,7 +233,7 @@
         
             {% for meal in meals %}
 
-                {%if meal.meal_category == 'drink'%}
+                {%if meal.meal_category == 'drinks'%}
 
                 {%if user.id is not None%}
                 
